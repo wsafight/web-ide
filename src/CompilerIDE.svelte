@@ -1,4 +1,6 @@
 <script lang="ts">
+  export let keywords: Record<string, any>
+
   import MonkeyLexer from './monkey-lan/Lexer'
 
   let sourceCode = '';
@@ -6,18 +8,10 @@
   function handleLexing() {
     const lexer: MonkeyLexer = new MonkeyLexer(sourceCode)
     lexer.lexing()
-    console.log('cccccc')
   }
 </script>
 
 <style>
-    main {
-        text-align: center;
-        padding: 1em;
-        max-width: 240px;
-        margin: 0 auto;
-    }
-
     h1 {
         color: #ff3e00;
         text-transform: uppercase;
@@ -38,13 +32,13 @@
 </header>
 
 <main>
-    <textarea
-            name=""
-            id=""
-            cols="30"
-            rows="10"
-            bind:value={sourceCode}
-    />
-    <button on:click={handleLexing}>lexing</button>
+    <div
+            contenteditable
+            style="height: 480px"
+    >
+    </div>
+    <button
+            on:click={handleLexing}>lexing
+    </button>
 </main>
 
