@@ -10,6 +10,14 @@ class MonkeyLexer {
   static PLUS_SIGN = 3
   static INTEGER = 4
   static SEMICOLON = 5
+  static IF = 6
+  static ELSE = 7
+
+  static KeyWords = {
+    let: new Token(MonkeyLexer.LET, 'let', 0),
+    if: new Token(MonkeyLexer.IF, 'if', 0),
+    else: new Token(MonkeyLexer.ELSE, 'else', 0),
+  }
 
 
   private position: number = 0
@@ -18,6 +26,10 @@ class MonkeyLexer {
   private ch: string | number = ''
 
   constructor(private sourceCode: string) {
+  }
+
+  initialKeyWords() {
+
   }
 
 
@@ -67,7 +79,11 @@ class MonkeyLexer {
       default:
         let res = this.readIdentifier()
         if (res !== false) {
-          tok = new Token(MonkeyLexer.IDENTIFIER, res, lineCount)
+          if (res in MonkeyLexer.KeyWords) {
+            tok = MonkeyLexer.KeyWords[res]
+          } else {
+            tok = new Token(MonkeyLexer.IDENTIFIER, res, lineCount)
+          }
         } else {
           res = this.readNumber()
           if (res !== false) {
