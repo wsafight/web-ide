@@ -1,5 +1,13 @@
-<script>
-  export let name;
+<script lang="ts">
+  import MonkeyLexer from './monkey-lan/Lexer'
+
+  let sourceCode = '';
+
+  function handleLexing() {
+    const lexer: MonkeyLexer = new MonkeyLexer(sourceCode)
+    lexer.lexing()
+    console.log('cccccc')
+  }
 </script>
 
 <style>
@@ -35,7 +43,8 @@
             id=""
             cols="30"
             rows="10"
-/>
-<button>lexing</button>
+            bind:value={sourceCode}
+    />
+    <button on:click={handleLexing}>lexing</button>
 </main>
 
